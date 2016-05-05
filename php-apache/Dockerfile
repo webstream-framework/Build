@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
   php5-mysql
 
 RUN rm -rf /var/lib/apt/lists/*
-RUN sqlite3 /tmp/sandbox.db < /tmp/setup.sql
+RUN sqlite3 /tmp/sandbox.db < /tmp/setup.sql && chmod 777 /tmp/sandbox.db
 RUN a2enmod rewrite
 RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring
 RUN curl -s http://getcomposer.org/installer | php && mv -f composer.phar /usr/bin/composer
