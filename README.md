@@ -1,11 +1,8 @@
 # Build
 This repository is exists the files for building and testing for docker.  
-To build a disposable environment that middleware is included in the cloud and on-premises environment you can run the test.  
-
-This repository and DockerHub repository is in cooperation "Automated Build".
+To build a disposable environment that middleware is included in the cloud and on-premises environment you can run the test. This repository and DockerHub repository is in cooperation "Automated Build".
 
 ## Usage for build
-### Build by Dockerfile
 ```shell
 $> sudo docker build --tag=webstream/mysql .
 $> sudo docker build --tag=webstream/postgres .
@@ -14,7 +11,6 @@ $> sudo docker build --tag=webstream/php-apache .
 
 or
 
-### Build by DockerHub
 ```shell
 $> sudo docker pull webstream/mysql
 $> sudo docker pull webstream/postgres
