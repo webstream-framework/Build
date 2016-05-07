@@ -33,11 +33,6 @@ php-apache
 $> sudo docker run -itd -p 80:80 --link mysql:mysql --link postgres:postgres --name php-apache webstream/php-apache
 ```
 
-Prepare testing
-```shell
-$> sudo docker exec php-apache sh -c "cd /var/www/html && git clone https://github.com/webstream-framework/Test.git && cd Test && composer install && cd TestApp && composer install && touch log/webstream.test.log && chmod -R 777 log"
-```
-
 ## Dockerfile URL
 * [Dockerfile(mysql)](https://github.com/webstream-framework/Build/blob/master/mysql/Dockerfile)
 * [Dockerfile(postgres)](https://github.com/webstream-framework/Build/blob/master/postgres/Dockerfile)

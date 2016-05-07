@@ -1,10 +1,8 @@
 FROM php:7.0.6-apache
 MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
 
-RUN mkdir /tmp/Test
 ADD setup.sql /tmp/setup.sql
-ADD composer.json /tmp/Test/composer.json
-ADD initialize.sh /usr/local/bin/initialize.sh
+ADD composer.json /var/www/html/composer.json
 
 RUN apt-get update && apt-get install -y \
   git \
@@ -21,8 +19,5 @@ RUN sqlite3 /tmp/sandbox.db < /tmp/setup.sql && chmod 777 /tmp/sandbox.db && \
 
 RUN curl -s http://getcomposer.org/installer | php && \
   mv -f composer.phar /usr/bin/composer && \
-  cd /tmp/Test && composer install && \
-  chmod +x /usr/local/bin/initialize.sh && \
+  cd /var/www/html && composer install && \
   rm -rf /var/lib/apt/lists/*
-
-CMD ["initialize.sh"]
