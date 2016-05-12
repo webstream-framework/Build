@@ -1,6 +1,7 @@
 GRANT ALL PRIVILEGES ON sandbox.* TO mysql@"localhost" IDENTIFIED BY 'mysql' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON sandbox.* TO mysql@"192.168.0.%" IDENTIFIED BY 'mysql' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON sandbox.* TO mysql@"172.17.0.%" IDENTIFIED BY 'mysql' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON sandbox.* TO mysql@"172.18.0.%" IDENTIFIED BY 'mysql' WITH GRANT OPTION;
 
 DROP TABLE if exists T_WebStream;
 DROP TABLE if exists T_WebStream_Entity_Mapping;
