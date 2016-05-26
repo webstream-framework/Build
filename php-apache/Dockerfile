@@ -15,9 +15,16 @@ RUN apt-get update && apt-get install -y \
 
 RUN sqlite3 /tmp/sandbox.db < /tmp/setup.sql && chmod 777 /tmp/sandbox.db && \
   a2enmod rewrite && \
-  docker-php-ext-install pdo_mysql pdo_pgsql mbstring
+  pecl install apcu && \
+  docker-php-ext-install pdo_mysql pdo_pgsql mbstring && \
+  docker-php-ext-enable apcu opcache
+
+RUN ( \
+  echo "opcache.enable_cli=1"; \
+  ) > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 RUN curl -s http://getcomposer.org/installer | php && \
   mv -f composer.phar /usr/bin/composer && \
   cd /var/www/html && composer install && \
-  rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/* && \
+  apt-get clean -y && apt-get autoclean -y
