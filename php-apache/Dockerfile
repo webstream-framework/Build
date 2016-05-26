@@ -26,5 +26,5 @@ RUN ( \
 RUN curl -s http://getcomposer.org/installer | php && \
   mv -f composer.phar /usr/bin/composer && \
   cd /var/www/html && composer install && \
-  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/* && \
+  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear && \
   apt-get clean -y && apt-get autoclean -y
