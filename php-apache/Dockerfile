@@ -1,4 +1,4 @@
-FROM php:7.0.6-apache
+FROM php:7.0.8-apache
 MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
 
 ADD setup.sql /tmp/setup.sql
@@ -8,16 +8,32 @@ RUN apt-get update && apt-get install -y \
   git \
   zip \
   libpq-dev \
+  libmemcached-dev \
+  redis-server \
   postgresql-9.4 \
   postgresql-contrib-9.4 \
   sqlite3 \
   php5-mysql
 
+RUN git clone https://github.com/php-memcached-dev/php-memcached.git -b php7 && \
+  cd php-memcached && \
+  phpize && \
+  ./configure && \
+  make && \
+  make install
+
+RUN git clone https://github.com/phpredis/phpredis.git -b php7 && \
+  cd phpredis && \
+  phpize && \
+  ./configure && \
+  make && \
+  make install
+
 RUN sqlite3 /tmp/sandbox.db < /tmp/setup.sql && chmod 777 /tmp/sandbox.db && \
   a2enmod rewrite && \
   pecl install apcu && \
   docker-php-ext-install pdo_mysql pdo_pgsql mbstring && \
-  docker-php-ext-enable apcu opcache
+  docker-php-ext-enable apcu opcache memcached redis
 
 RUN ( \
   echo "opcache.enable_cli=1"; \
