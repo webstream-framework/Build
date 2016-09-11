@@ -42,5 +42,5 @@ RUN ( \
 RUN curl -s http://getcomposer.org/installer | php && \
   mv -f composer.phar /usr/bin/composer && \
   cd /var/www/html && composer install && \
-  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear && \
+  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear && rm -rf php-memcached && rm -rf phpredis &&  \
   apt-get clean -y && apt-get autoclean -y
