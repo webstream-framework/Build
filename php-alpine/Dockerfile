@@ -9,11 +9,21 @@ RUN pecl install xdebug-2.4.1 \
   && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
   && docker-php-ext-enable xdebug
 
-RUN curl -s http://getcomposer.org/installer | php && mv -f composer.phar /usr/bin/composer \
-  && chmod +x /usr/bin/composer \
-  && composer self-update
+RUN git clone https://github.com/php-memcached-dev/php-memcached.git -b php7 && \
+  cd php-memcached && \
+  phpize && \
+  ./configure && \
+  make && \
+  make install
 
-RUN apk del git autoconf build-base \
+RUN git clone https://github.com/phpredis/phpredis.git -b php7 && \
+  cd phpredis && \
+  phpize && \
+  ./configure && \
+  make && \
+  make install
+
+RUN apk del git autoconf build-base && rm -rf php-memcached && rm -rf phpredis &&  \
   && rm -rf /var/cache/apk/*
 
 WORKDIR /workspace
