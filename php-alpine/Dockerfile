@@ -14,7 +14,8 @@ RUN git clone https://github.com/php-memcached-dev/php-memcached.git -b php7 && 
 RUN pecl install xdebug-2.4.1 \
   && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
   && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-  && docker-php-ext-enable xdebug memcached
+  && pecl install apcu \
+  && docker-php-ext-enable xdebug apcu opcache memcached
 
 RUN apk del git autoconf build-base && rm -rf php-memcached \
   && rm -rf /var/cache/apk/*
