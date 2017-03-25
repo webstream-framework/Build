@@ -1,4 +1,4 @@
-FROM php:7.1.0-cli
+FROM php:7.1.3-cli
 MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
 
 RUN apt-get update && apt-get install -y \
@@ -22,7 +22,7 @@ RUN git clone https://github.com/phpredis/phpredis.git -b php7 && \
   make && \
   make install
 
-RUN pecl install xdebug-2.5.0 apcu \
+RUN pecl install xdebug-2.5.1 apcu \
   && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
   && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
   && docker-php-ext-enable xdebug apcu opcache memcached redis

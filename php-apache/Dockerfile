@@ -1,4 +1,4 @@
-FROM php:7.0.8-apache
+FROM php:7.1.3-apache
 MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
 
 ADD setup.sql /tmp/setup.sql
