@@ -1,4 +1,4 @@
-FROM postgres:9.5
+FROM postgres:9.6
 MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
 
 ADD setup.sql /docker-entrypoint-initdb.d/setup.sql
