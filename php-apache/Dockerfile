@@ -1,4 +1,4 @@
-FROM php:7.1.3-apache
+FROM php:7.1.10-apache
 MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
 
 ADD setup.sql /tmp/setup.sql
@@ -6,24 +6,26 @@ ADD composer.json /var/www/html/composer.json
 
 RUN apt-get update && apt-get install -y \
   git \
+  wget \
   zip \
   libpq-dev \
   libmemcached-dev \
   redis-server \
-  postgresql-9.4 \
-  postgresql-contrib-9.4 \
   sqlite3 \
-  php5-mysql
+  php7.0-mysql
+
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+ echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' > /etc/apt/sources.list.d/pgdg.list && \
+ apt-get update && apt-get install -y \
+ postgresql-9.6 \
+ postgresql-contrib-9.6
+
+RUN pecl install redis-3.1.0 && \
+  pecl install xdebug-2.5.5 && \
+  docker-php-ext-enable redis xdebug
 
 RUN git clone https://github.com/php-memcached-dev/php-memcached.git -b php7 && \
   cd php-memcached && \
-  phpize && \
-  ./configure && \
-  make && \
-  make install
-
-RUN git clone https://github.com/phpredis/phpredis.git -b php7 && \
-  cd phpredis && \
   phpize && \
   ./configure && \
   make && \
@@ -42,5 +44,5 @@ RUN ( \
 RUN curl -s http://getcomposer.org/installer | php && \
   mv -f composer.phar /usr/bin/composer && \
   cd /var/www/html && composer install && \
-  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear && rm -rf php-memcached && rm -rf phpredis &&  \
+  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear && rm -rf php-memcached && rm -rf /tmp/* \
   apt-get clean -y && apt-get autoclean -y

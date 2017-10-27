@@ -8,24 +8,17 @@ RUN apt-get update && apt-get install -y \
   libmemcached-dev \
   redis-server
 
+RUN pecl install redis-3.1.0 && debug-2.5.5 && apcu \
+  && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+  && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+  && docker-php-ext-enable xdebug apcu opcache memcached redis
+
 RUN git clone https://github.com/php-memcached-dev/php-memcached.git -b php7 && \
   cd php-memcached && \
   phpize && \
   ./configure && \
   make && \
   make install
-
-RUN git clone https://github.com/phpredis/phpredis.git -b php7 && \
-  cd phpredis && \
-  phpize && \
-  ./configure && \
-  make && \
-  make install
-
-RUN pecl install xdebug-2.5.5 apcu \
-  && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
-  && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-  && docker-php-ext-enable xdebug apcu opcache memcached redis
 
 RUN echo "opcache.enable_cli=1" > /usr/local/etc/php/conf.d/opcache-recommended.ini && \
   echo "apc.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
