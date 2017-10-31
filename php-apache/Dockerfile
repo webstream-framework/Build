@@ -1,4 +1,4 @@
-FROM php:7.1.10-apache
+FROM php:7.2-rc-apache
 MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
 
 ADD setup.sql /tmp/setup.sql
@@ -20,7 +20,7 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
  postgresql-9.6 \
  postgresql-contrib-9.6
 
-RUN pecl install redis-3.1.0 && \
+RUN pecl install redis-3.1.4 && \
   pecl install xdebug-2.5.5 && \
   docker-php-ext-enable redis xdebug
 
@@ -44,5 +44,5 @@ RUN ( \
 RUN curl -s http://getcomposer.org/installer | php && \
   mv -f composer.phar /usr/bin/composer && \
   cd /var/www/html && composer install && \
-  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear && rm -rf php-memcached && rm -rf /tmp/* \
+  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear && rm -rf php-memcached && rm -rf /tmp/* && \
   apt-get clean -y && apt-get autoclean -y
