@@ -4,22 +4,16 @@ To build a disposable environment that middleware is included in the cloud and o
 
 ## Usage for build
 ```shell
-$> sudo docker build -t webstream/memcached .
-$> sudo docker build -t webstream/redis .
-$> sudo docker build -t webstream/mysql .
-$> sudo docker build -t webstream/postgres .
 $> sudo docker build -t webstream/php-apache .
 ```
 
 or
 
 ```shell
-$> sudo docker pull webstream/memcached
-$> sudo docker pull webstream/redis
-$> sudo docker pull webstream/mysql
-$> sudo docker pull webstream/postgres
 $> sudo docker pull webstream/php-apache
 ```
+
+Other docker images can be executed with the same command.
 
 ## Usage for run
 memcached
