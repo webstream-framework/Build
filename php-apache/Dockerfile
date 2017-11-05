@@ -1,4 +1,4 @@
-FROM php:7.2-rc-apache
+FROM php:7.0-apache
 MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
 
 ADD setup.sql /tmp/setup.sql
@@ -11,7 +11,10 @@ RUN apt-get update && apt-get install -y \
   libpq-dev \
   libmemcached-dev \
   redis-server \
-  sqlite3 \
+  sqlite3
+
+RUN echo 'deb http://deb.debian.org/debian/ stretch main contrib non-free' >> /etc/apt/sources.list && \
+  apt-get update && apt-get install -y \
   php7.0-mysql
 
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
@@ -21,15 +24,9 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
  postgresql-contrib-9.6
 
 RUN pecl install redis-3.1.4 && \
+  pecl install memcached-3.0.3 && \
   pecl install xdebug-2.5.5 && \
-  docker-php-ext-enable redis xdebug
-
-RUN git clone https://github.com/php-memcached-dev/php-memcached.git -b php7 && \
-  cd php-memcached && \
-  phpize && \
-  ./configure && \
-  make && \
-  make install
+  docker-php-ext-enable redis xdebug memcached
 
 RUN sqlite3 /tmp/sandbox.db < /tmp/setup.sql && chmod 777 /tmp/sandbox.db && \
   a2enmod rewrite && \
