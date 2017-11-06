@@ -26,13 +26,12 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
 RUN pecl install redis-3.1.4 && \
   pecl install memcached-3.0.3 && \
   pecl install xdebug-2.5.5 && \
-  docker-php-ext-enable redis xdebug memcached
+  pecl install apcu && \
+  docker-php-ext-enable redis xdebug memcached apcu opcache
 
 RUN sqlite3 /tmp/sandbox.db < /tmp/setup.sql && chmod 777 /tmp/sandbox.db && \
   a2enmod rewrite && \
-  pecl install apcu && \
-  docker-php-ext-install pdo_mysql pdo_pgsql mbstring && \
-  docker-php-ext-enable apcu opcache memcached redis
+  docker-php-ext-install pdo_mysql pdo_pgsql mbstring
 
 RUN ( \
   echo "opcache.enable_cli=1"; \
