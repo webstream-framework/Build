@@ -31,3 +31,5 @@ CREATE TABLE `T_WebStream_Entity_Mapping_Type` (
   `smallint_num` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `T_WebStream` (name) VALUES ('Alice');
