@@ -48,3 +48,6 @@ WITH (
 );
 ALTER TABLE t_webstream_entity_mapping_type
   OWNER TO postgres;
+
+INSERT INTO t_webstream (name) VALUES ('test1');
+INSERT INTO t_webstream (name) VALUES ('test2');
