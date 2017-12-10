@@ -33,3 +33,4 @@ CREATE TABLE `T_WebStream_Entity_Mapping_Type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `T_WebStream` (name) VALUES ('test1');
+INSERT INTO `T_WebStream` (name) VALUES ('test2');
