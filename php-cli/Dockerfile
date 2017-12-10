@@ -1,8 +1,6 @@
 FROM php:7.0-cli
 MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
 
-ADD composer.json /tmp/composer.json
-
 RUN apt-get update && apt-get install -y \
   git \
   zip \
@@ -21,10 +19,7 @@ RUN pecl install memcached-3.0.3 && \
   docker-php-ext-install pdo pdo_mysql && \
   docker-php-ext-enable xdebug apcu opcache memcached redis
 
-RUN curl -s http://getcomposer.org/installer | php && \
-  mv -f composer.phar /usr/bin/composer && \
-  cd /tmp && composer install && \
-  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear && rm -rf php-memcached && rm -rf phpredis && rm -rf /tmp/* && \
+RUN rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear && rm -rf php-memcached && rm -rf phpredis && rm -rf /tmp/* && \
   apt-get clean -y && apt-get autoclean -y
 
 WORKDIR /workspace
