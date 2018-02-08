@@ -1,4 +1,4 @@
-FROM php:7.1-alpine
+FROM php:7.0-alpine
 MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
 
 RUN apk add --update git build-base autoconf \
