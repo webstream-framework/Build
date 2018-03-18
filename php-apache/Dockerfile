@@ -1,5 +1,5 @@
 FROM php:7.0-apache
-MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
+LABEL maintainer Ryuichi Tanaka <mapserver2007@gmail.com>
 
 ADD setup.sql /tmp/setup.sql
 ADD composer.json /var/www/html/composer.json

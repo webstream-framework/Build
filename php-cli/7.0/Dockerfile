@@ -1,5 +1,5 @@
 FROM php:7.0-cli
-MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
+LABEL maintainer Ryuichi Tanaka <mapserver2007@gmail.com>
 
 RUN apt-get update && apt-get install -y \
   git \

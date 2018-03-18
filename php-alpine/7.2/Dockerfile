@@ -1,5 +1,5 @@
 FROM php:7.2-alpine
-MAINTAINER Ryuichi Tanaka <mapserver2007@gmail.com>
+LABEL maintainer Ryuichi Tanaka <mapserver2007@gmail.com>
 
 RUN apk add --update git build-base autoconf \
   && rm -rf /var/cache/apk/*
