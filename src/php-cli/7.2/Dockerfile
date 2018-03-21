@@ -20,7 +20,7 @@ RUN pecl install redis-4.0.0 && \
   pecl install xdebug-2.6.0 && \
   pecl install apcu && \
   echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini && \
-  echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+  echo "xdebug.reemote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini && \
   echo "opcache.enable_cli=1" > /usr/local/etc/php/conf.d/opcache-recommended.ini && \
   echo "apc.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini && \
   docker-php-ext-install pdo pdo_mysql pdo_pgsql && \
