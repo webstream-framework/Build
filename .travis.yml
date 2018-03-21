@@ -12,6 +12,7 @@ cache: bundler
 
 before_script:
   - cd test
+  - bundle install
 
 script:
   - bundle exec rspec
