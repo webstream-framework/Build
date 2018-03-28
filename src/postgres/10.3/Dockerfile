@@ -1,4 +1,4 @@
-FROM postgres:9.6
+FROM postgres:10.3
 LABEL maintainer Ryuichi Tanaka <mapserver2007@gmail.com>
 
 ADD setup.sql /docker-entrypoint-initdb.d/setup.sql
