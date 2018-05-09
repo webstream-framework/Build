@@ -1,7 +1,7 @@
 FROM postgres:9.6
 LABEL maintainer Ryuichi Tanaka <mapserver2007@gmail.com>
 
-ADD ../setup.sql /docker-entrypoint-initdb.d/setup.sql
+ADD setup.sql /docker-entrypoint-initdb.d/setup.sql
 RUN localedef -i ja_JP -c -f UTF-8 -A /usr/share/locale/locale.alias ja_JP.UTF-8
 RUN echo "host all all 0.0.0.0/0 md5" >> /var/lib/postgresql/data/pg_hba.conf
 
