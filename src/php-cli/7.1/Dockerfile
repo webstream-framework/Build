@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
   redis-server
 
 RUN pecl install memcached-3.0.4 && \
-  pecl install redis-3.1.6 && \
+  pecl install redis-4.0.2 && \
   pecl install xdebug-2.6.0 && \
   pecl install apcu && \
   echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini && \
