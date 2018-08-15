@@ -7,7 +7,7 @@ describe 'Dockerfile' do
   describe docker_build(dockerfile_path) do
     describe docker_run(described_image) do
       describe command('sqlite3 --version') do
-        its(:stdout) { should match(/3\.21/) }
+        its(:stdout) { should match(/3\.24/) }
       end
     end
   end
