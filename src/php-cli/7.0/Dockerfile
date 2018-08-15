@@ -4,12 +4,13 @@ LABEL maintainer Ryuichi Tanaka <mapserver2007@gmail.com>
 RUN apt-get update && apt-get install -y \
   git \
   zip \
+  zlib1g-dev \
   libpq-dev \
   libmemcached-dev \
   redis-server
 
 RUN pecl install memcached-3.0.4 && \
-  pecl install redis-4.0.2 && \
+  pecl install redis-4.1.0 && \
   pecl install xdebug-2.6.0 && \
   pecl install apcu && \
   echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini && \

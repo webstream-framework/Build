@@ -9,14 +9,8 @@ RUN apt-get update && apt-get install -y \
   libmemcached-dev \
   redis-server
 
-RUN git clone -b php7 --depth 1 https://github.com/php-memcached-dev/php-memcached && \
-  cd php-memcached && \
-  phpize && \
-  ./configure && \
-  make && \
-  make install
-
-RUN pecl install redis-4.0.3 && \
+RUN pecl install memcached-3.0.4 && \
+  pecl install redis-4.1.0 && \
   pecl install xdebug-2.6.0 && \
   pecl install apcu && \
   echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini && \
