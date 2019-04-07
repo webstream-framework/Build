@@ -1,0 +1,31 @@
+version: 2.1
+
+executors:
+  php-cli:
+    docker:
+      - image: docker:18
+        environment:
+        - LOCALE: ja
+        - LANG: ja_JP.UTF-8
+        - TZ: Asia/Tokyo
+
+commands:
+  build:
+    steps:
+      - spec:
+        name: run dockerspec
+        command: |
+          docker -v
+
+jobs:
+  php-cli:
+    executor:
+      name: php-cli
+    steps:
+      - spec
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - php-cli
