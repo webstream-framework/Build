@@ -12,6 +12,7 @@ executors:
 commands:
   build:
     steps:
+      - checkout
       - spec:
         name: run dockerspec
         command: |
