@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
   libmemcached-dev \
   redis-server
 
-RUN pecl install memcached-3.0.4 && \
+RUN pecl install memcached-3.1.3 && \
   pecl install redis-4.3.0 && \
   pecl install xdebug-2.7.1 && \
   pecl install apcu && \
