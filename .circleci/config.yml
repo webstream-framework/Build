@@ -10,7 +10,7 @@ executors:
         - TZ: Asia/Tokyo
 
 commands:
-  build:
+  build_and_test:
     steps:
       - checkout
       - spec:
@@ -23,7 +23,7 @@ jobs:
     executor:
       name: php-cli
     steps:
-      - spec
+      - build_and_test
 
 workflows:
   version: 2
