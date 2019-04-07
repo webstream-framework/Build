@@ -12,7 +12,7 @@ describe 'Dockerfile' do
   }
 
   versions.each do |version|
-    describe docker_build("#{dockerfile_path}/#{version}") do
+    describe docker_build(path: "#{dockerfile_path}/#{version}", tag: "dockerspec/mysql:#{version}") do
       describe docker_run(described_image, env: env) do
         describe command('mysql -V') do
           its(:stdout) { should include(version) }

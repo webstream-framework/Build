@@ -3,11 +3,11 @@ require 'spec_helper'
 describe 'Dockerfile' do
   image_name = 'php-cli'
   dockerfile_path = File.dirname(__FILE__) + "/../../src/#{image_name}"
-  versions = ['7.0', '7.1', '7.2']
+  versions = ['7.1', '7.2', '7.3']
   php_modules = %w[memcached redis apcu]
 
   versions.each do |version|
-    describe docker_build("#{dockerfile_path}/#{version}") do
+    describe docker_build(path: "#{dockerfile_path}/#{version}", tag: "dockerspec/#{image_name}:#{version}") do
       describe docker_run(described_image), retry: 30 do
         describe command('php -v'), retry: 1 do # disable retries here
           its(:stdout) { should include(version) }
